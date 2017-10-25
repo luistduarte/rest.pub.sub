@@ -53,10 +53,10 @@ public class SimpleREST extends AbstractVerticle {
 	System.out.println("JSON IN:" + routingContext.getBodyAsString() + "\n" + "address:" + address);
 
 
-    String dataPoint = obj.getJsonObject("data_point").toString();
+    String data = obj.getJsonObject("data").toString();
 
-    routingContext.response().putHeader("content-type", "application/json").end(obj.toString());
-    vertx.eventBus().publish(address, dataPoint);
+    routingContext.response().end();
+    vertx.eventBus().publish(address, data);
  }
 
   private void sendError(int statusCode, HttpServerResponse response) {
